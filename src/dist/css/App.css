@@ -1,0 +1,68 @@
+
+.imageCard {
+  width: 348px;
+  height: 542px;
+}
+
+@media screen and (max-width: 1200px) {
+  .imageCard {
+    width: auto;
+    height: auto;
+  }
+}
+
+.badgeMargin {
+  margin-right: 3%
+}
+
+.fixedAdd {
+  position: fixed;
+  right: 15%;
+  bottom: 10%;
+  z-index: 1030;
+}
+
+.btn-circle {
+    color: #ffff;
+    width: 30px;
+    height: 30px;
+    padding: 6px 0px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.42857;
+}
+
+.btn-circle.btn-xl {
+    width: 70px;
+    height: 70px;
+    padding: 10px 16px;
+    border-radius: 35px;
+    font-size: 24px;
+    line-height: 1.33;
+}
+
+.wrapperLogin {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.containerLogin {
+  height: 300px;
+  width: 100px;
+  background: black;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scrollable-menu {
+  height: auto;
+  max-height: 200px;
+  overflow-x: hidden;
+}
+
