@@ -7,11 +7,6 @@ import axios from 'axios';
 import CategorySelection from './CategorySelection';
 import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
-import ContentManager from './ContentManager.jsx'
-
-let contentManager = new ContentManager(this);
-
-
 export default class SiteSelection extends React.Component {
   constructor(props) {
     super(props);
@@ -22,7 +17,8 @@ export default class SiteSelection extends React.Component {
       dropdownOpen: false,
       sites : [],
       selectedSite : null,
-      siteSelected : false
+      siteSelected : false,
+      selectedSiteName : "asd"
     };
   }
 
@@ -54,12 +50,12 @@ getSites = async () => {
 sitesListRender(){
   if (this.state.sites[0] !== undefined){
     return this.state.sites.map((i) =>
-    (<DropdownItem onClick={() => this.select(i.id)} name={i.name}>{i.name}</DropdownItem>))
+    (<DropdownItem onClick={() => this.select(i.id, i.name)} name={i.name}>{i.name}</DropdownItem>))
     }
   }
 
-select(site){
-  this.setState({siteSelected : true, dropdownOpem : !this.state.dropdownOpen, selectedSite : site})
+select(site, name){
+  this.setState({siteSelected : true, dropdownOpem : !this.state.dropdownOpen, selectedSite : site, selectedSiteName : name})
 }
 
 
@@ -72,7 +68,7 @@ render() {
     <div>
       <h1>Bienvenido</h1>
         <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-        <DropdownToggle caret>
+        <DropdownToggle caret name>
           Seleccione un País
         </DropdownToggle>
         <DropdownMenu 

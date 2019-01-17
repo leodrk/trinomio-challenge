@@ -10,14 +10,14 @@ export default class ContentManager{
     createCard(context,content) {
         return (
           <div  >
-          <Card color="dark" >
+          <Card  color="warning" >
             <CardBody>
-              <CardTitle className="fuenteInfo" align="center">{content.title}</CardTitle>
+              <CardTitle className="fuenteInfo" align="center">{content.title.slice(0,30)}</CardTitle>
             </CardBody>
             <img width="380px" height="280px" src={content.thumbnail}/>
             <CardBody>
-              <CardText className="fuenteInfo" align="center">{content.price} </CardText>
-              <Link to={content.permalink}>Enlace</Link>
+              <CardText className="fuenteInfo" align="center" >Precio : ${content.price} </CardText>
+              <Link to={content.permalink}>Ver en MercadoLibre</Link>
             </CardBody>
           </Card>
           </div>
@@ -39,18 +39,18 @@ export default class ContentManager{
       }
       
       createRow(context,tipo) {
-        return this.splitOn(context,3,tipo).map((list, i) => (
+        return this.splitOn(context,4,tipo).map((list, i) => (
           <div className="card-deck" key={`card_${i}`} >
             {list.map(contenido => this.createCard(context,contenido))}
           </div>
         ));
       }
 
-      renderList(context,tipo){
+      renderList(context,tipo,titulo){
         if (context.state[tipo].length>0)
         { //id = "recomendados"
-         return <Alert className="container-fluid">
-                <div align="left"><font className="fuenteTitulos">{tipo}</font></div>
+         return <Alert className="container-fluid" color="warning">
+                <div align="left"><font className="fuenteTitulos">{titulo}</font></div>
                 {this.createRow(context,{tipo})}
               </Alert>
         }

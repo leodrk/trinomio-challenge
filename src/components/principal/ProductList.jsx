@@ -35,8 +35,8 @@ getProducts = async () => {
 render() {
   return (
     <div id="portada" className="content-box row">
-    {console.log(this.state)}
-    {contentManager.renderList(this,'products')}
+    {console.log(this.props)}
+    {contentManager.renderList(this,'products', this.props.selectedCategoryName)}
     </div>
   );
 }

@@ -15,6 +15,8 @@ export default class CategorySelection extends React.Component {
       dropdownOpen: false,
       categories : [],
       categorySelected : false,
+      selectedCategory : null,
+      selectedCategoryName : null
     };
   }
 
@@ -26,6 +28,9 @@ toggle() {
   this.setState({
     dropdownOpen: !this.state.dropdownOpen
   });
+  if (!this.state.dropdownOpen){
+    this.setState({categorySelected : false})
+  }
 }
 
 getCategories = async () => {
@@ -40,12 +45,12 @@ getCategories = async () => {
 
 categoriesListRender(){
   if (this.state.categories[0] !== undefined){
-    return this.state.categories.map((cat) =>(<DropdownItem onClick={() => this.select(cat.id)} name={cat.name}>{cat.name}</DropdownItem>))
+    return this.state.categories.map((cat) =>(<DropdownItem onClick={() => this.select(cat.id, cat.name)} name={cat.name}>{cat.name}</DropdownItem>))
   }
 }
 
-select(category){
-  this.setState({categorySelected : true, dropdownOpem : !this.state.dropdownOpen, selectedCategory : category})
+select(category, name){
+  this.setState({categorySelected : true, dropdownOpem : !this.state.dropdownOpen, selectedCategory : category, selectedCategoryName : name})
 }
   
 render() {
