@@ -6,7 +6,7 @@ import logo from '../../dist/Logo.png';
 import React from 'react';
 import axios from 'axios';
 import CategorySelection from './CategorySelection';
-import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Alert } from 'reactstrap';
+import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 
 export default class SiteSelection extends React.Component {
   constructor(props) {
@@ -18,18 +18,18 @@ export default class SiteSelection extends React.Component {
       sites : [],
       currentSite : null,
       siteSelected : false,
-      scrollValue : "Lista de Países disponibles"
+      scrollValue : "Países"
     };
   }
 
-  toggle() {
-    this.setState({
-      dropdownOpen: !this.state.dropdownOpen
-    });
-    if (!this.state.dropdownOpen){
-      this.setState({siteSelected : false})
-    }
+toggle() {
+  this.setState({
+    dropdownOpen: !this.state.dropdownOpen
+  });
+  if (!this.state.dropdownOpen){
+    this.setState({siteSelected : false})
   }
+}
 
 componentDidMount() {
   this.getSites();
@@ -48,21 +48,27 @@ getSites = async () => {
 sitesListRender(){
   if (this.state.sites[0] !== undefined){
     return this.state.sites.map((i) =>
-    (<DropdownItem onClick={() => this.select(i.id,i.name)} name={i.name}>{i.name}</DropdownItem>))
+    (<DropdownItem onClick={() => 
+                        this.select(i.id,i.name)} name={i.name}>{i.name}</DropdownItem>))
     }
   }
 
 select(site,name){
-  this.setState({siteSelected : true, dropdownOpem : !this.state.dropdownOpen, currentSite : site, scrollValue : name})
+  this.setState
+        ({siteSelected : true,
+          dropdownOpem : !this.state.dropdownOpen, 
+          currentSite : site, 
+          scrollValue : name})
 }
   
 render() {
   return (
     <div>    
-      <div align="center" className="divStyle"><img src={logo} width="350px" height="200px" alt="logo" /></div>
-      <h1 align="center">¡Bienvenido!</h1>
-      <div align="center">Para comenzar su búsqueda, por favor seleccione un país.</div>
       <div align="center" className="divStyle">
+        <img src={logo} width="350px" height="200px" alt="logo" /></div>
+        <h1 align="center">¡Bienvenido!</h1>
+        <div align="center">Para comenzar su búsqueda, por favor seleccione un país.</div>
+          <div align="center" className="divStyle">
         <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
         <DropdownToggle caret>
           {this.state.scrollValue}
@@ -86,10 +92,10 @@ render() {
             }}>
           {this.sitesListRender()}
         </DropdownMenu>
-      </ButtonDropdown>
-      {this.state.siteSelected ? <CategorySelection {...this.state}/> : <div></div>}
-    </div>
-    </div>
+        </ButtonDropdown>
+        {this.state.siteSelected ? <CategorySelection {...this.state}/> : <div></div>}
+        </div>
+      </div>
   );
   }
 }
