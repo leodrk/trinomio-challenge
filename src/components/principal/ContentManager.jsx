@@ -45,11 +45,21 @@ export default class ContentManager{
         ));
       }
 
-      renderList(context,tipo,size){
+      countElements(json){
+        var key, count = 0;
+        for(key in json) {
+          count++;
+        }
+        return count;
+      }
+
+      renderList(context,tipo){
+        if (context.state[tipo] !== undefined) {
          return <Alert className="container-fluid" color="dark">
-                <div align="left"><font className="fuenteTitulos">Resultados : {size}</font></div>
+                <div align="left"><font className="fuenteTitulos"> Resultados : {this.countElements(context.state[tipo])} </font></div>
                 {this.createRow(context,{tipo})}
                 </Alert>
+          }
       }
       
 }

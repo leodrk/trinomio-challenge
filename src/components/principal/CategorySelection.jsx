@@ -4,19 +4,25 @@ import 'open-iconic/font/css/open-iconic-bootstrap.min.css';
 import '../../dist/css/App.css';
 import React from 'react';
 import axios from 'axios';
-import ProductList from './ProductList';
 import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Alert } from 'reactstrap';
+import ContentManager from './ContentManager.jsx'
+
+let contentManager = new ContentManager(this);
 
 export default class CategorySelection extends React.Component {
   constructor(props) {
     super(props);
     this.toggle = this.toggle.bind(this);
+    this.select = this.select.bind(this);
+    this.renderProducts =this.renderProducts.bind(this)
     this.state = {
       dropdownOpen: false,
       categories : [],
       categorySelected : false,
       currentCategory : null,
-      scrollValue : "Categorias"
+      scrollValue : "Categorias",
+      products : undefined,
+      busqueda : false
     };
   }
 
@@ -38,7 +44,7 @@ getCategories = async () => {
       .get('https://cors-anywhere.herokuapp.com/api.mercadolibre.com/sites/'+ this.props.currentSite +'/categories')
       .then(data => this.setState({ categories: data.data }))
       .catch(err => {
-          console.log(err);
+          window.alert("Imposible acceder a las categorias de este site")
           return null;
       });
 };
@@ -50,8 +56,34 @@ categoriesListRender(){
 }
 
 select(category, name){
-  this.setState({categorySelected : true, dropdownOpem : !this.state.dropdownOpen, currentCategory : category, scrollValue : name})
+  this.state.currentCategory = category
+  this.state.categorySelected = true
+  this.handleClick()
+  this.setState({dropdownOpen : !this.state.dropdownOpen, scrollValue : name})
+  
 }
+
+renderProducts()
+{
+  if (this.state !== undefined){
+  return(
+    <div>
+    {contentManager.renderList(this,'products')}
+    </div>
+    )
+  }
+  }
+
+  handleClick = async () =>{
+    await axios
+    .get('https://api.mercadolibre.com/sites/'+this.state.currentCategory.slice(0,3)+'/search?category='+this.state.currentCategory+'&official_store_id=all')
+    .then(data => {this.state.products= data.data.results})
+    .catch(err => {
+        console.log("se pudrio todo");
+        return null;
+    });
+    this.setState({busqueda : true})
+   }
   
 render() {
   return (
@@ -81,7 +113,7 @@ render() {
         {this.categoriesListRender()}
       </DropdownMenu>
     </ButtonDropdown>
-    {this.state.categorySelected ? <ProductList {...this.state}/> : <div/>}
+    {this.state.busqueda ? <this.renderProducts/> : <div/>}
   </div>
 );
 }
