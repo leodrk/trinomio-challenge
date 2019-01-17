@@ -25,7 +25,7 @@ componentDidMount() {
 getProducts = async () => {
   await axios
        .get('https://api.mercadolibre.com/sites/'+this.props.selectedCategory.slice(0,3)+'/search?category='+this.props.selectedCategory+'&official_store_id=all')
-       .then(data => this.setState({ products: data.data }))
+       .then(data => this.setState({ products: data.data.results}))
        .catch(err => {
            console.log(err);
            return null;
@@ -36,7 +36,7 @@ render() {
   return (
     <div id="portada" className="content-box row">
     {console.log(this.state)}
-      {contentManager.renderList(this,'products')}
+    {contentManager.renderList(this,'products')}
     </div>
   );
 }

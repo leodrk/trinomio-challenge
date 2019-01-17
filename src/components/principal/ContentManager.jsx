@@ -3,19 +3,21 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import React from 'react';
 import { Card, CardText, CardBody, Alert,
     CardTitle } from 'reactstrap';
+import { Link } from 'react-router-dom'
 
 export default class ContentManager{
 
     createCard(context,content) {
         return (
           <div  >
-          <Card color="dark" onClick ={() => this.goTo(context,content.permalink)}>
+          <Card color="dark" >
             <CardBody>
-              <CardTitle align="center">{content.title}</CardTitle>
+              <CardTitle className="fuenteInfo" align="center">{content.title}</CardTitle>
             </CardBody>
             <img width="380px" height="280px" src={content.thumbnail}/>
             <CardBody>
-              <CardText align="center">{content.price} </CardText>
+              <CardText className="fuenteInfo" align="center">{content.price} </CardText>
+              <Link to={content.permalink}>Enlace</Link>
             </CardBody>
           </Card>
           </div>
