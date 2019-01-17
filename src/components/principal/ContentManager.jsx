@@ -2,8 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import React from 'react';
 import { Card, CardText, CardBody, Alert,
-    CardTitle } from 'reactstrap';
-import { Link } from 'react-router-dom'
+    CardTitle, Button } from 'reactstrap';
 
 export default class ContentManager{
 
@@ -17,7 +16,7 @@ export default class ContentManager{
             <img width="380px" height="280px" src={content.thumbnail}/>
             <CardBody>
               <CardText className="fuenteInfo" align="center" >Precio : ${content.price} </CardText>
-              <Link to={content.permalink}>Ver en MercadoLibre</Link>
+              <Button color="dark" to={content.permalink}>Ver en MercadoLibre</Button>
             </CardBody>
           </Card>
           </div>
@@ -46,15 +45,11 @@ export default class ContentManager{
         ));
       }
 
-      renderList(context,tipo,titulo){
-        if (context.state[tipo].length>0)
-        { //id = "recomendados"
-         return <Alert className="container-fluid" color="warning">
-                <div align="left"><font className="fuenteTitulos">{titulo}</font></div>
+      renderList(context,tipo,size){
+         return <Alert className="container-fluid" color="dark">
+                <div align="left"><font className="fuenteTitulos">Resultados : {size}</font></div>
                 {this.createRow(context,{tipo})}
-              </Alert>
-        }
-        else
-        return <div></div>
+                </Alert>
       }
+      
 }

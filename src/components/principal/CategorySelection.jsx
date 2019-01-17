@@ -5,7 +5,7 @@ import '../../dist/css/App.css';
 import React from 'react';
 import axios from 'axios';
 import ProductList from './ProductList';
-import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Alert } from 'reactstrap';
 
 export default class CategorySelection extends React.Component {
   constructor(props) {
@@ -56,6 +56,7 @@ select(category, name){
 render() {
   return (
     <div align="center" className="divStyle">
+    <div align="center">Seleccione la categoría que desea listar.</div>
       <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
       <DropdownToggle caret>
         {this.state.scrollValue}
@@ -80,7 +81,7 @@ render() {
         {this.categoriesListRender()}
       </DropdownMenu>
     </ButtonDropdown>
-    {this.state.categorySelected ? <ProductList {...this.state}/> : <div></div>}
+    {this.state.categorySelected ? <ProductList {...this.state}/> : <div/>}
   </div>
 );
 }

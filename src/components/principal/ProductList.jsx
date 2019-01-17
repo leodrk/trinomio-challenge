@@ -4,7 +4,7 @@ import 'open-iconic/font/css/open-iconic-bootstrap.min.css';
 import '../../dist/css/App.css';
 import React from 'react';
 import axios from 'axios';
-import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { Alert } from 'reactstrap';
 
 import ContentManager from './ContentManager.jsx'
 
@@ -14,7 +14,8 @@ export default class ProductList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      products : []
+      products : [],
+      total : 0
     };
   }
 
@@ -24,19 +25,19 @@ componentDidMount() {
 
 getProducts = async () => {
   await axios
-       .get('https://api.mercadolibre.com/sites/'+this.props.currentCategory.slice(0,3)+'/search?category='+this.props.selectedCategory+'&official_store_id=all')
-       .then(data => this.setState({ products: data.data.results}))
+       .get('https://api.mercadolibre.com/sites/'+this.props.currentCategory.slice(0,3)+'/search?category='+this.props.currentCategory+'&official_store_id=all')
+       .then(data => this.setState({ products: data.data.results, total : data.data.results}))
        .catch(err => {
            console.log(err);
            return null;
        });
  };
 
+
 render() {
   return (
     <div id="portada" className="content-box row">
-    {console.log(this.props)}
-    {contentManager.renderList(this,'products', this.props.selectedCategoryName)}
+    {contentManager.renderList(this,'products', this.state.total.lenght)}
     </div>
   );
 }

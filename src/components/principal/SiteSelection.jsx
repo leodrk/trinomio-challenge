@@ -6,7 +6,7 @@ import logo from '../../dist/Logo.png';
 import React from 'react';
 import axios from 'axios';
 import CategorySelection from './CategorySelection';
-import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Alert } from 'reactstrap';
 
 export default class SiteSelection extends React.Component {
   constructor(props) {
@@ -58,8 +58,7 @@ select(site,name){
   
 render() {
   return (
-      <div>
-      
+    <div>    
       <div align="center" className="divStyle"><img src={logo} width="350px" height="200px" alt="logo" /></div>
       <h1 align="center">¡Bienvenido a <strike>localhost:3000</strike></h1>
       <h1 align="center">MercaditoLibre.com!</h1>
@@ -89,8 +88,8 @@ render() {
           {this.sitesListRender()}
         </DropdownMenu>
       </ButtonDropdown>
-      </div>
       {this.state.siteSelected ? <CategorySelection {...this.state}/> : <div></div>}
+    </div>
     </div>
   );
   }
