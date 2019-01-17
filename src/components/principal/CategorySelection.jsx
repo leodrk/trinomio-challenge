@@ -15,8 +15,8 @@ export default class CategorySelection extends React.Component {
       dropdownOpen: false,
       categories : [],
       categorySelected : false,
-      selectedCategory : null,
-      selectedCategoryName : null
+      currentCategory : null,
+      scrollValue : "Categorias"
     };
   }
 
@@ -35,7 +35,7 @@ toggle() {
 
 getCategories = async () => {
  await axios
-      .get('https://cors-anywhere.herokuapp.com/api.mercadolibre.com/sites/'+ this.props.selectedSite +'/categories')
+      .get('https://cors-anywhere.herokuapp.com/api.mercadolibre.com/sites/'+ this.props.currentSite +'/categories')
       .then(data => this.setState({ categories: data.data }))
       .catch(err => {
           console.log(err);
@@ -50,15 +50,15 @@ categoriesListRender(){
 }
 
 select(category, name){
-  this.setState({categorySelected : true, dropdownOpem : !this.state.dropdownOpen, selectedCategory : category, selectedCategoryName : name})
+  this.setState({categorySelected : true, dropdownOpem : !this.state.dropdownOpen, currentCategory : category, scrollValue : name})
 }
   
 render() {
   return (
-    <div>
+    <div align="center" className="divStyle">
       <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
       <DropdownToggle caret>
-        Seleccione una Categoría
+        {this.state.scrollValue}
       </DropdownToggle>
       <DropdownMenu 
           modifiers={{

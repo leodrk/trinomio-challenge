@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'open-iconic/font/css/open-iconic-bootstrap.min.css';
 import '../../dist/css/App.css';
+import logo from '../../dist/Logo.png';
 import React from 'react';
 import axios from 'axios';
 import CategorySelection from './CategorySelection';
@@ -10,15 +11,14 @@ import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reac
 export default class SiteSelection extends React.Component {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
     this.toggle = this.toggle.bind(this);
     this.select = this.select.bind(this);
     this.state = {
       dropdownOpen: false,
       sites : [],
-      selectedSite : null,
+      currentSite : null,
       siteSelected : false,
-      selectedSiteName : "asd"
+      scrollValue : "Países"
     };
   }
 
@@ -45,33 +45,31 @@ getSites = async () => {
       });
 };
 
-
-
 sitesListRender(){
   if (this.state.sites[0] !== undefined){
     return this.state.sites.map((i) =>
-    (<DropdownItem onClick={() => this.select(i.id, i.name)} name={i.name}>{i.name}</DropdownItem>))
+    (<DropdownItem onClick={() => this.select(i.id,i.name)} name={i.name}>{i.name}</DropdownItem>))
     }
   }
 
-select(site, name){
-  this.setState({siteSelected : true, dropdownOpem : !this.state.dropdownOpen, selectedSite : site, selectedSiteName : name})
-}
-
-
-handleClick(){
-  this.setState({siteSelected : true})
+select(site,name){
+  this.setState({siteSelected : true, dropdownOpem : !this.state.dropdownOpen, currentSite : site, scrollValue : name})
 }
   
 render() {
   return (
-    <div>
-      <h1>Bienvenido</h1>
+      <div>
+      
+      <div align="center" className="divStyle"><img src={logo} width="350px" height="200px" alt="logo" /></div>
+      <h1 align="center">¡Bienvenido a <strike>localhost:3000</strike></h1>
+      <h1 align="center">MercaditoLibre.com!</h1>
+      <div align="center">Para comenzar su búsqueda, por favor seleccione un país.</div>
+      <div align="center" className="divStyle">
         <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-        <DropdownToggle caret name>
-          Seleccione un País
+        <DropdownToggle caret>
+          {this.state.scrollValue}
         </DropdownToggle>
-        <DropdownMenu 
+        <DropdownMenu
             modifiers={{
               setMaxHeight: {
                 enabled: true,
@@ -91,6 +89,7 @@ render() {
           {this.sitesListRender()}
         </DropdownMenu>
       </ButtonDropdown>
+      </div>
       {this.state.siteSelected ? <CategorySelection {...this.state}/> : <div></div>}
     </div>
   );

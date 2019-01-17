@@ -39,7 +39,7 @@ export default class ContentManager{
       }
       
       createRow(context,tipo) {
-        return this.splitOn(context,4,tipo).map((list, i) => (
+        return this.splitOn(context,3,tipo).map((list, i) => (
           <div className="card-deck" key={`card_${i}`} >
             {list.map(contenido => this.createCard(context,contenido))}
           </div>

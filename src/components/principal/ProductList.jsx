@@ -24,7 +24,7 @@ componentDidMount() {
 
 getProducts = async () => {
   await axios
-       .get('https://api.mercadolibre.com/sites/'+this.props.selectedCategory.slice(0,3)+'/search?category='+this.props.selectedCategory+'&official_store_id=all')
+       .get('https://api.mercadolibre.com/sites/'+this.props.currentCategory.slice(0,3)+'/search?category='+this.props.selectedCategory+'&official_store_id=all')
        .then(data => this.setState({ products: data.data.results}))
        .catch(err => {
            console.log(err);
