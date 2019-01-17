@@ -18,7 +18,7 @@ export default class SiteSelection extends React.Component {
       sites : [],
       currentSite : null,
       siteSelected : false,
-      scrollValue : "Países"
+      scrollValue : "Lista de Países disponibles"
     };
   }
 
@@ -60,8 +60,7 @@ render() {
   return (
     <div>    
       <div align="center" className="divStyle"><img src={logo} width="350px" height="200px" alt="logo" /></div>
-      <h1 align="center">¡Bienvenido a <strike>localhost:3000</strike></h1>
-      <h1 align="center">MercaditoLibre.com!</h1>
+      <h1 align="center">¡Bienvenido!</h1>
       <div align="center">Para comenzar su búsqueda, por favor seleccione un país.</div>
       <div align="center" className="divStyle">
         <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>

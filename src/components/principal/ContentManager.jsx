@@ -6,7 +6,7 @@ import { Card, CardText, CardBody, Alert,
 
 export default class ContentManager{
 
-    createCard(context,content) {
+    createCard(content) {
         return (
           <div  >
           <Card  color="warning" >
@@ -16,7 +16,7 @@ export default class ContentManager{
             <img width="380px" height="280px" src={content.thumbnail}/>
             <CardBody>
               <CardText className="fuenteInfo" align="center" >Precio : ${content.price} </CardText>
-              <Button color="dark" to={content.permalink}>Ver en MercadoLibre</Button>
+              <Button href = {content.permalink} color="danger">Ver en MercadoLibre</Button>
             </CardBody>
           </Card>
           </div>
@@ -40,7 +40,7 @@ export default class ContentManager{
       createRow(context,tipo) {
         return this.splitOn(context,3,tipo).map((list, i) => (
           <div className="card-deck" key={`card_${i}`} >
-            {list.map(contenido => this.createCard(context,contenido))}
+            {list.map(contenido => this.createCard(contenido))}
           </div>
         ));
       }
